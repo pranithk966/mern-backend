@@ -14,12 +14,15 @@ app.get('/', (req, res) => {
 
 app.use('/tasks', router)
 
+const PORT = process.env.PORT || 4000
+app.listen(PORT, (req, res) => {
+  console.log('listening on port', PORT)
+})
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(process.env.PORT || 4000, (req, res) => {
-      console.log('connected to db & running on port', process.env.PORT || 4000)
-    })
+    console.log('connected to database')
   })
   .catch((err) => {
     console.log(err)
